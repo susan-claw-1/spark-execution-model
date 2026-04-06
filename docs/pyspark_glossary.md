@@ -6,6 +6,7 @@ A compact glossary to help you recall core terms when working with PySpark and t
 - GatewayServer (JVM): The server on the JVM side that exposes Java objects to Py4J.
 - JavaGateway (Python): The Py4J client that connects to the JVM gateway and obtains proxies to Java objects.
 - JavaObject / Py4J proxy: Python representations of Java objects; Python calls on these proxies are forwarded to the JVM.
+- **Py4J Sockets:** Py4J uses TCP/IP sockets to establish a communication channel between the Python process (driver/worker) and the JVM process (Spark driver/executors). TCP ensures reliable, ordered, bi-directional byte streams, essential for method invocation and data transfer between the two languages.
 - SparkSession: Entry point for Spark with the DataFrame/Dataset APIs; holds configuration and context for a Spark app.
 - DataFrame / Dataset: Distributed, structured data. DataFrame is the Dataset[Row] API; operations are optimized by Spark.
 - RDD: Resilient Distributed Dataset, the older, low-level distributed data abstraction. Still present for fine-grained control.
@@ -34,4 +35,4 @@ A compact glossary to help you recall core terms when working with PySpark and t
 - Broadcast Join: A join strategy where the smaller table is broadcast to all workers to avoid shuffles.
 - Data Skipping: Delta Lake optimization using statistics to skip irrelevant data.
 
-> Quick Day 1 mapping: Day 1 uses Py4J to connect Python to JVM Spark; Python issues commands via proxies to SparkSession/DataFrame; the JVM executes the heavy lifting on executors while Python handles orchestration.
+> Quick Day 1 mapping: Day 1 uses Py4J to connect Python to JVM Spark; Python issues commands via proxies to SparkSession/DataFrame; the JVM executes the heavy lifting on executors while Python handles orchestration. The communication happens over TCP/IP sockets.
